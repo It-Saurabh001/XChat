@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743341521354",
+    "project_id": "xchat-393aa",
+    "storage_bucket": "xchat-393aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743341521354:android:eeb655322bed75b093f733",
+        "android_client_info": {
+          "package_name": "com.example.xchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmshTQJ8bpyqhydPRs1iPNHp1hxVvIxAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
