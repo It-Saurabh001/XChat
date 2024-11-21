@@ -6,4 +6,6 @@ plugins {
     id("com.google.dagger.hilt.android") version ("2.52") apply false
     id("org.jetbrains.kotlin.kapt") version ("1.9.10") apply false
     alias(libs.plugins.google.gms.google.services) apply false
+
+
 }
