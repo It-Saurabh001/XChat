@@ -48,46 +48,62 @@ fun StatusScreen(
     val statuses by vm.status.collectAsState(initial = emptyList())
     val userData = vm.userData.value
     val inProcess = vm.inProgressStatus.value
-    if (inProcess){
-        CommonProgressBar()
-    }else{
-
-        val myStatuses = statuses.filter {
-            it.user.userId == userData?.userId
-        }
-        val otherStatuses = statuses.filter {
-            it.user.userId != userData?.userId
-        }
-        val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) {
+    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) {
             uri ->
-            uri?.let {
-                vm.uploadStatus(uri)
+        uri?.let {
+            vm.uploadStatus(uri)
+        }
+
+    }
+
+
+
+    Scaffold(
+        floatingActionButton = {
+            FAB {
+                launcher.launch("image/*")
+            }
+        },
+        bottomBar = {
+            BottomNavigationMenu(
+                selectedItem = selectedItem,
+                navController = navController
+            )
+        }
+    ) { paddingValues ->
+        if (inProcess) {
+            CommonProgressBar()
+        } else {
+            val myStatuses = statuses.filter {
+                it.user.userId == userData?.userId
+            }
+            val otherStatuses = statuses.filter {
+                it.user.userId != userData?.userId
             }
 
-        }
-
-
-        Scaffold (
-            floatingActionButton = {
-                FAB {
-                    launcher.launch("image/*")
-                }
-            },
-            content = {
-                Column (modifier = Modifier
+            Column(
+                modifier = Modifier
                     .fillMaxSize()
-                    .padding(it)){
-                    TitleText(txt = "Status")
-                    if (statuses.isEmpty()){
-                        Column (modifier = Modifier
+                    .padding(paddingValues)
+            ) {
+                TitleText(txt = "Status")
+
+                if (statuses.isEmpty()) {
+                    Column(
+                        modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center){
-                            Text(text = "No Status Available")
-
-                        }
-                    }else {
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(text = "No Status Available")
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
                         if (myStatuses.isNotEmpty()) {
                             CommonRow(
                                 imageUrl = myStatuses[0].user.imageUrl,
@@ -97,34 +113,32 @@ fun StatusScreen(
                                     navController = navController,
                                     DestinationScreen.SingleStatus.createRoute(myStatuses[0].user.userId!!)
                                 )
-
                             }
                             CommonDivider()
-                            val uniqueUsers = otherStatuses.map { it.user }.toSet().toList()
-                            LazyColumn(modifier = Modifier.weight(1f)) {
-                                items(uniqueUsers) { user ->
-                                    CommonRow(imageUrl = user.imageUrl, name = user.name) {
-                                        navigateTo(
-                                            navController = navController,
-                                            DestinationScreen.SingleStatus.createRoute(user.userId!!)
-                                        )
+                        }
 
-                                    }
-
+                        val uniqueUsers = otherStatuses.map { it.user }.toSet().toList()
+                        LazyColumn(
+                            modifier = Modifier.weight(1f, fill = true)
+                        ) {
+                            items(uniqueUsers) { user ->
+                                CommonRow(
+                                    imageUrl = user.imageUrl,
+                                    name = user.name
+                                ) {
+                                    navigateTo(
+                                        navController = navController,
+                                        DestinationScreen.SingleStatus.createRoute(user.userId!!)
+                                    )
                                 }
-
                             }
                         }
                     }
-
-                    BottomNavigationMenu(selectedItem = selectedItem,
-                        navController = navController,
-                        )
-
                 }
             }
-        )
+        }
     }
+
 }
 @Composable
 fun FAB(

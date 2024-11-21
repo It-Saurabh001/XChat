@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.xchat.Screens.ChatListScreen
 import com.example.xchat.Screens.LoginScreen
 import com.example.xchat.Screens.ProfileScreen
@@ -30,7 +32,7 @@ sealed class DestinationScreen(var route : String){
     object Profile : DestinationScreen("profile")
     object ChatList : DestinationScreen("chatList")
     object SingleChat : DestinationScreen("singleChat/{chatId}"){
-        fun createRoute(id: String) = "singlechat/$id"
+        fun createRoute(chatId: String) = "singleChat/$chatId"
     }
     object StatusList : DestinationScreen("statusList")
     object SingleStatus : DestinationScreen("singleStatus/{userId}"){
@@ -67,10 +69,12 @@ class MainActivity : ComponentActivity() {
             composable(DestinationScreen.ChatList.route){
                 ChatListScreen(vm = vm, navController = navController)
             }
-            composable(DestinationScreen.SingleChat.route){
-                val chatId = it.arguments?.getString("chatId")
+            composable(
+                DestinationScreen.SingleChat.route // "singleChat/{chatId}"
+                ) { backStackEntry ->
+                val chatId = backStackEntry.arguments?.getString("chatId")
                 chatId?.let {
-                    SingleChatScreen(navController,vm, chatId)
+                    SingleChatScreen(navController = navController, vm = vm, chatId = it)
                 }
             }
             composable(DestinationScreen.Login.route){

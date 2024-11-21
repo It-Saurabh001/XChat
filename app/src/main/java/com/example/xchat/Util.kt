@@ -134,4 +134,26 @@ fun CommonRow(imageUrl : String?, name : String? , onItemClick: () -> Unit) {
 
     }
 
+}@Composable
+fun CommonRows(imageUrl : String?, name : String? ,chatId: String, onItemClick: (String) -> Unit) {
+    Row (modifier = Modifier
+        .fillMaxWidth()
+        .height(75.dp)
+        .clickable { onItemClick(chatId) },
+        verticalAlignment = Alignment.CenterVertically){
+        CommonImage(data = imageUrl,
+            modifier = Modifier
+                .padding(8.dp)
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(Color.Red)
+        )
+        Text(
+            text = name?:"---",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 4.dp)
+        )
+
+    }
+
 }

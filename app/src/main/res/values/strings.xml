@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">XChat</string>
+    <string name="attribution_tag">com.example.myapp</string>
 </resources>

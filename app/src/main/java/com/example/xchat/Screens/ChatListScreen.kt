@@ -32,25 +32,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.wear.compose.material.Button
 import com.example.xchat.CommonProgressBar
 import com.example.xchat.CommonRow
+import com.example.xchat.CommonRows
 import com.example.xchat.DestinationScreen
 import com.example.xchat.LCViewModel
 import com.example.xchat.TitleText
 import com.example.xchat.navigateTo
 
+
 @Composable
 fun ChatListScreen(
-    navController: NavController,
+    navController: NavController ,
     vm: LCViewModel
 ) {
 
     extracted(navController,vm)
 }
-
 @Composable
 fun extracted(navController: NavController, vm:LCViewModel) {
 
@@ -95,25 +97,55 @@ fun extracted(navController: NavController, vm:LCViewModel) {
                         }
                     }
                     else{
+                        Log.d("TAG", "chat screen is not empty")
+//                        LazyColumn(modifier = Modifier.weight(1f)) {
+//                            items(chats){chat->
+//
+//                                val chatUser = if(chat.user1.userId == userData?.userId){
+//                                    chat.user2
+//                                }else{
+//                                    chat.user1
+//                                }
+//                                Log.d("TAG", "chatuserid : ${chatUser.userId}")
+//                                CommonRow(imageUrl = chatUser.imageUrl, name =chatUser.name ) {
+//                                    chat.chatId?.let { chatId->
+//                                //                                        chatId ->
+//                                //                                        navController.navigate("${DestinationScreen.SingleChat.route}/${chatId}")
+//                                        Log.d("TAG","chatid is : ${chatId}")
+//                                        navigateTo(navController,
+////                                            DestinationScreen.Profile.route
+//                                            DestinationScreen.SingleChat.createRoute(chatId = chatId)
+//                                        )
+//                                    }
+//
+//                                }
+//
+//                            }
+//                        }
                         LazyColumn(modifier = Modifier.weight(1f)) {
                             items(chats){chat->
+
                                 val chatUser = if(chat.user1.userId == userData?.userId){
                                     chat.user2
                                 }else{
                                     chat.user1
                                 }
-                                CommonRow(imageUrl = chatUser.imageUrl, name =chatUser.name ) {
-                                    chat.chatId?.let {
-                                        navigateTo(
-                                            navController,
-                                            DestinationScreen.SingleChat.createRoute(id = it)
+                                Log.d("TAG", "chatuserid : ${chatUser.userId}")
+                                CommonRows(imageUrl = chatUser.imageUrl, name =chatUser.name ,chatId = chat.chatId) {
+                                        Log.d("TAG","chatid is : ${it}")
+                                        navigateTo(navController,
+//                                            DestinationScreen.Profile.route
+                                            DestinationScreen.SingleChat.createRoute(chatId = it)
                                         )
-                                    }
+
 
                                 }
 
                             }
                         }
+
+                        //
+
                     }
                     BottomNavigationMenu(
                         selectedItem = selectedItem,

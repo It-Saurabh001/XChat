@@ -1,24 +1,68 @@
 [versions]
-agp = "8.5.0"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
+agp = "8.7.3"
+coilNetworkOkhttp = "3.0.4"
+firebaseAuthVersion = "23.2.0"
+firebaseBom = "33.12.0"
+firebaseDatabaseVersion = "21.0.0"
+firebaseFirestoreVersion = "25.1.3"
+firebaseMessaging = "24.1.1"
+firebaseStorageKtxVersion = "21.0.1"
+googleHiltCompiler = "2.53.1"
+hiltAndroid = "2.53.1"
+hiltAndroidCompiler = "2.53.1"
+hiltAndroidTestingVersion = "2.53.1"
+hiltNavigationCompose = "1.2.0"
+kotlin = "2.1.20"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.6"
-activityCompose = "1.9.2"
-composeBom = "2024.04.01"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.10.1"
+composeBom = "2025.03.01"
 googleGmsGoogleServices = "4.4.2"
-firebaseAuth = "23.0.0"
-firebaseFirestore = "25.1.0"
-runtimeLivedata = "1.7.3"
+firebaseAuth = "23.2.0"
+firebaseFirestore = "25.1.3"
+material = "1.7.8"
+navigationCompose = "2.8.9"
+protobufJava = "3.25.1"
+protobufJavalite = "3.25.5"
+protobufKotlin = "3.25.1"
+protoliteWellKnownTypes = "18.0.0"
+roomCompiler = "2.6.1"
+runtimeLivedata = "1.7.8"
 firebaseStorageKtx = "21.0.1"
 firebaseStorage = "21.0.1"
-composeMaterial = "1.4.0"
-toolsCore = "1.0.0-alpha10"
+composeMaterial = "1.4.1"
+toolsCore = "1.0.0-alpha13"
+ui = "1.7.8"
+uiTooling = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomCompiler" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilNetworkOkhttp" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
+dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTestingVersion" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
+#noinspection SimilarGradleDependency
+firebase-auth-v2111 = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuthVersion" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
+#noinspection SimilarGradleDependency
+firebase-firestore-v2511 = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestoreVersion" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+#noinspection SimilarGradleDependency
+firebase-storage-ktx-v2010 = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebaseStorageKtxVersion" }
+google-firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabaseVersion" }
+google-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "googleHiltCompiler" }
+google-protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -39,9 +83,17 @@ firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
 androidx-tools-core = { group = "androidx.privacysandbox.tools", name = "tools-core", version.ref = "toolsCore" }
+protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobufJava" }
+protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufJavalite" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobufKotlin" }
+ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

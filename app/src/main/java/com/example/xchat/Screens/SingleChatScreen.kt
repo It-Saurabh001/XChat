@@ -1,9 +1,11 @@
 package com.example.xchat.Screens
 
+
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,20 +20,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -60,7 +63,13 @@ fun SingleChatScreen(navController: NavController,
 
 
     LaunchedEffect(key1 = Unit) {
-        vm.populateMessages(chatId)
+        try {
+            Log.d("TAG", "SingleChatScreen: entered")
+            vm.populateMessages(chatId)
+        } catch (e: Exception) {
+            // Handle the exception, e.g., log it or display an error message
+            Log.e("TAG", "Error populating messages", e)
+        }
     }
     BackHandler {
         navController.popBackStack()
@@ -72,6 +81,7 @@ fun SingleChatScreen(navController: NavController,
             navController.popBackStack()
             vm.depopulateMessage()
         }
+
         MessageBox(modifier = Modifier.weight(1f), chatMessages = chatMessage.value, currentUserId = myUser?.userId?:"")
         ReplyBox(reply = reply, onReplyChange = { reply = it }, onSendReply = onSendReply)
     }
@@ -79,7 +89,7 @@ fun SingleChatScreen(navController: NavController,
 
 @Composable
 fun MessageBox(modifier: Modifier,chatMessages : List<Message>,currentUserId: String) {
-    LazyColumn (modifier = modifier){
+    LazyColumn (modifier = modifier.background(color = Color(0xFF90EE90))){
         items(chatMessages){msg->
             val alignment = if(msg.sendBy == currentUserId) Alignment.End else Alignment.Start
             val color = if(msg.sendBy == currentUserId) Color(0xFF68C400) else Color(0xFFC0C0C0)
@@ -106,16 +116,26 @@ fun ReplyBox(
     onReplyChange: (String) -> Unit,
     onSendReply: () -> Unit,
 ) {
+    var showEmojiKeyboard by remember { mutableStateOf(false) }
+    val keyboardController = LocalSoftwareKeyboardController.current
     Column(modifier = Modifier.fillMaxWidth()) {
         CommonDivider()
         Row (modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween){
-            TextField(value = reply, onValueChange =onReplyChange, maxLines = 3 )
-            Button(onClick = onSendReply ) {
+            TextField(
+                value = reply, onValueChange = onReplyChange, maxLines = 3,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .verticalScroll(rememberScrollState())
+                    .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp)),
+                shape = RoundedCornerShape(8.dp),
+                placeholder = { Text("Message") },
+            )
+            Button(onClick = onSendReply) {
                 Text(text = "Send")
-                
+
             }
         }
     }
@@ -127,11 +147,13 @@ fun ChatHeader(name: String, imageUrl : String, onBackClicked : ()-> Unit) {
         .fillMaxWidth()
         .wrapContentHeight(),
         verticalAlignment = Alignment.CenterVertically) {
-        Icon(Icons.Rounded.ArrowBack, contentDescription = null, modifier = Modifier
+        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, modifier = Modifier
+
             .clickable {
                 onBackClicked.invoke()
             }
-            .padding(8.dp))
+            .padding(8.dp),
+            tint = Color.Black)
         CommonImage(data =
         imageUrl,
             modifier = Modifier

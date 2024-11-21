@@ -96,13 +96,13 @@ fun SingleStatusScreen(
     }
     else{
         Log.d("TAG", "SingleStatusScreen: screen not working")
-        println("no status available")
-//        Column (modifier = Modifier
-//            .fillMaxWidth(),
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center) {
-//            Text(text = "No Status Available")
-//        }
+//        println("no status available")
+        Column (modifier = Modifier
+            .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center) {
+            Text(text = "No Status Available")
+        }
     }
 }
 
