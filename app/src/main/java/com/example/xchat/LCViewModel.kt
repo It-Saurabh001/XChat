@@ -475,52 +475,5 @@ class LCViewModel @Inject constructor(
                 handleExecption(exception, "Failed to fetch chats for status population")
                 inProgressStatus.value = false
             }
-//            .addSnapshotListener {value, error ->
-//            if (error !=null){
-//                handleExecption(error)
-//                inProgressStatus.value = false
-//                return@addSnapshotListener
-//            }
-//            value?.let {
-//                val currentConnectons = arrayListOf(userId)
-//
-//                val chats = it.toObjects<ChatData>()
-//                chats.forEach{chat->
-//                    val user1Id = chat.user1.userId
-//                    val user2Id = chat.user2.userId
-//
-//                    //Add both user1 and user2 connections to currentConnections
-//                    if (user1Id == userId) {
-//                        user2Id?.let {currentConnectons.add(it)}
-//                    } else if (user2Id == userId) {
-//                        user1Id?.let {currentConnectons.add(it) }
-//                    }
-//                }
-//
-//                Log.d("LCViewModel", "Current Connections: $currentConnectons")
-//
-//                // Query the statues based on the connections
-//
-//                db.collection(STATUS)
-//                    .whereGreaterThan("timestamp",cutOff)
-//                    .whereIn("user.userId",currentConnectons)
-//                    .addSnapshotListener{
-//                        value, error->
-//
-//                        if (error!=null){
-//                            handleExecption(error)
-//                            inProgressStatus.value = false
-//                            return@addSnapshotListener
-//                        }
-//                        value?.let {
-////                            _status.value = it.toObjects()
-//                            val statuses = it.toObjects<Status>()
-//                            _status.value = statuses
-//                            Log.d("LCViewModel", "Fetched ${statuses.size} statuses")
-//                        }
-//                        inProgressStatus.value = false
-//                    }
-//            }
-//        }
     }
 }

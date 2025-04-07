@@ -75,8 +75,7 @@ fun SingleChatScreen(navController: NavController,
         navController.popBackStack()
         vm.depopulateMessage()
     }
-    Column(modifier = Modifier
-        .verticalScroll(rememberScrollState())) {
+    Column(modifier = Modifier) {
         ChatHeader(name = chatUser.name ?: "", imageUrl = chatUser.imageUrl ?: "") {
             navController.popBackStack()
             vm.depopulateMessage()
