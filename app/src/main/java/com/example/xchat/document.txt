@@ -1,0 +1,18 @@
+dark mode addition
+
+camera application if applicable
+
+user name change
+
+hold and delete user from database
+
+toast for signup and singin
+
+if possible then implement notification (on chat and navigation bar )
+
+navigation drawar for settings and privacy
+
+
+ui betterment
+
+on adding user if number not match show toast (user not available )

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -83,12 +84,12 @@ fun checkSignedIn(vm : LCViewModel, navController: NavController){
 @Composable
 fun CommonDivider() {
 
-    Divider(
-        color = Color.LightGray,
-        thickness = 1.dp,
+    HorizontalDivider(
         modifier = Modifier
             .alpha(0.3f)
-            .padding(top = 8.dp, bottom = 8.dp)
+            .padding(top = 8.dp, bottom = 8.dp),
+        thickness = 1.dp,
+        color = Color.LightGray
     )
 
 }

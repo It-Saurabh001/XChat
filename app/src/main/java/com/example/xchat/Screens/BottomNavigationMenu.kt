@@ -41,7 +41,7 @@ fun BottomNavigationMenu(
 
         // icon can show using loop at once
         // values() replace by entries
-        for(item in BottomNavigationItem.values()){
+        for(item in BottomNavigationItem.entries){
             Image(painter = painterResource(id = item.icon), contentDescription = null,
                 modifier = Modifier.size(40.dp)
                     .padding(4.dp)

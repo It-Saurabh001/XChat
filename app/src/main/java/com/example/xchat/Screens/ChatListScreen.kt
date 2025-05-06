@@ -174,8 +174,9 @@ fun FAB (
             Button(
                 onClick = { onAddChat(addChatNumber.value) },
                 modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(Color.Blue),
+//                    .background(Color.Blue)
+//                    .clip(RoundedCornerShape(10))
+
 
                 ) {
                 Text(
@@ -194,7 +195,10 @@ fun FAB (
                 OutlinedTextField(
                     value = addChatNumber.value,
                     onValueChange = { addChatNumber.value = it },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    label = {Text(text = "Add Number")},
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    maxLines = 1
+
                 )
             }
         )
